@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
+    <!-- List View -->
     <record id="view_pricing_exclusion_tree" model="ir.ui.view">
-        <field name="name">pricing.exclusion.tree</field>
+        <field name="name">pricing.exclusion.list</field>
         <field name="model">pricing.exclusion</field>
         <field name="arch" type="xml">
-            <tree string="Exclusions">
+            <list string="Exclusions">
                 <field name="name"/>
                 <field name="exclusion_type"/>
                 <field name="priority"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -61,6 +61,6 @@
     <record id="action_pricing_exclusion" model="ir.actions.act_window">
         <field name="name">Exclusions Commerciales</field>
         <field name="res_model">pricing.exclusion</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

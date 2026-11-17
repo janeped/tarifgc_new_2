@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
+    <!-- List View -->
     <record id="view_discount_rule_tree" model="ir.ui.view">
-        <field name="name">discount.rule.tree</field>
+        <field name="name">discount.rule.list</field>
         <field name="model">discount.rule</field>
         <field name="arch" type="xml">
-            <tree string="Règles de Remises">
+            <list string="Règles de Remises">
                 <field name="code"/>
                 <field name="name"/>
                 <field name="discount_type"/>
@@ -16,7 +16,7 @@
                 <field name="date_start"/>
                 <field name="date_end"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -69,6 +69,6 @@
     <record id="action_discount_rule" model="ir.actions.act_window">
         <field name="name">Règles de Remises</field>
         <field name="res_model">discount.rule</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

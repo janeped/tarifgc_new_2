@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Groupes de Tarification Produits -->
+    <!-- Tree View -->
     <record id="view_product_pricing_group_tree" model="ir.ui.view">
-        <field name="name">product.pricing.group.tree</field>
+        <field name="name">product.pricing.group.list</field>
         <field name="model">product.pricing.group</field>
         <field name="arch" type="xml">
-            <tree string="Groupes de Tarification Produits">
+            <list string="Groupes de Tarification Produit">
                 <field name="sequence" widget="handle"/>
                 <field name="code"/>
                 <field name="name"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -35,25 +35,42 @@
     </record>
 
     <record id="action_product_pricing_group" model="ir.actions.act_window">
-        <field name="name">Groupes de Produits</field>
+        <field name="name">Groupes de Tarification</field>
         <field name="res_model">product.pricing.group</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Classes de Remises Produits -->
+    <!-- Classes de Remise Exceptionnelle -->
     <record id="view_product_discount_exceptional_tree" model="ir.ui.view">
-        <field name="name">product.discount.exceptional.tree</field>
+        <field name="name">product.discount.exceptional.list</field>
         <field name="model">product.discount.exceptional</field>
         <field name="arch" type="xml">
-            <tree string="Classes de Remises Produits">
+            <list string="Classes de Remise Exceptionnelle">
                 <field name="code"/><field name="name"/><field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_product_discount_exceptional" model="ir.actions.act_window">
-        <field name="name">Classes de Remises Produits</field>
+        <field name="name">Classes de Remise Exceptionnelle</field>
         <field name="res_model">product.discount.exceptional</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Familles Promotionnelles -->
+    <record id="view_product_promotional_family_tree" model="ir.ui.view">
+        <field name="name">product.promotional.family.list</field>
+        <field name="model">product.promotional.family</field>
+        <field name="arch" type="xml">
+            <list string="Familles Promotionnelles">
+                <field name="code"/><field name="name"/><field name="promotional_code"/><field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_product_promotional_family" model="ir.actions.act_window">
+        <field name="name">Familles Promotionnelles</field>
+        <field name="res_model">product.promotional.family</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>
