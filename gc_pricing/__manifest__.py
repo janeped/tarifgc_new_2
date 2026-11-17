@@ -13,8 +13,11 @@
         'product',
     ],
     'data': [
-        'security/ir.model.access.csv',
+        # 1. Charger d'abord les groupes de sécurité
         'security/pricing_security.xml',
+        # 2. Puis les règles d'accès (qui référencent les groupes)
+        'security/ir.model.access.csv',
+        # 3. Ensuite les autres données
         'data/pricing_sequence.xml',
         'views/pricing_rule_views.xml',
         'views/discount_rule_views.xml',
