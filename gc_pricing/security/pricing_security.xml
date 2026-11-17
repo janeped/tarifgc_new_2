@@ -7,15 +7,17 @@
         <field name="sequence">50</field>
     </record>
 
-    <!-- Groupe Administrateur Tarification -->
-    <record id="group_pricing_admin" model="res.groups">
-        <field name="name">Administrateur Tarification</field>
+    <!-- ORDRE IMPORTANT : Les groupes doivent être définis de bas en haut de la hiérarchie -->
+    <!-- car un groupe qui en hérite un autre doit le référencer après sa création -->
+
+    <!-- 1. Groupe Lecteur Tarification (base de la hiérarchie) -->
+    <record id="group_pricing_viewer" model="res.groups">
+        <field name="name">Lecteur Tarification</field>
         <field name="category_id" ref="module_category_pricing"/>
-        <field name="implied_ids" eval="[(4, ref('group_pricing_manager'))]"/>
-        <field name="comment">Accès complet : création, modification, suppression de toutes les règles tarifaires, import masse, configuration.</field>
+        <field name="comment">Consultation seule des règles tarifaires, promotions, exclusions. Accès aux wizards de simulation et traçabilité.</field>
     </record>
 
-    <!-- Groupe Gestionnaire Tarification -->
+    <!-- 2. Groupe Gestionnaire Tarification (hérite de Viewer) -->
     <record id="group_pricing_manager" model="res.groups">
         <field name="name">Gestionnaire Tarification</field>
         <field name="category_id" ref="module_category_pricing"/>
@@ -23,10 +25,11 @@
         <field name="comment">Création et modification des règles, consultations, simulations. Pas de suppression ni d'import masse.</field>
     </record>
 
-    <!-- Groupe Lecteur Tarification -->
-    <record id="group_pricing_viewer" model="res.groups">
-        <field name="name">Lecteur Tarification</field>
+    <!-- 3. Groupe Administrateur Tarification (hérite de Manager → donc aussi de Viewer) -->
+    <record id="group_pricing_admin" model="res.groups">
+        <field name="name">Administrateur Tarification</field>
         <field name="category_id" ref="module_category_pricing"/>
-        <field name="comment">Consultation seule des règles tarifaires, promotions, exclusions. Accès aux wizards de simulation et traçabilité.</field>
+        <field name="implied_ids" eval="[(4, ref('group_pricing_manager'))]"/>
+        <field name="comment">Accès complet : création, modification, suppression de toutes les règles tarifaires, import masse, configuration.</field>
     </record>
 </odoo>
