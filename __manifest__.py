@@ -11,8 +11,6 @@
         'base',
         'sale',
         'product',
-        'uom',
-        'account',
     ],
     'data': [
         'security/ir.model.access.csv',
