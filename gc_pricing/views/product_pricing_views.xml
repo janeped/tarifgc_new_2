@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
-    <record id="view_product_pricing_group_tree" model="ir.ui.view">
+    <!-- Groupes de Tarification Produit -->
+    <record id="view_product_pricing_group_list" model="ir.ui.view">
         <field name="name">product.pricing.group.list</field>
         <field name="model">product.pricing.group</field>
         <field name="arch" type="xml">
@@ -9,7 +9,7 @@
                 <field name="sequence" widget="handle"/>
                 <field name="code"/>
                 <field name="name"/>
-                <field name="active"/>
+                <field name="active" column_invisible="1"/>
             </list>
         </field>
     </record>
@@ -21,14 +21,24 @@
             <form string="Groupe de Tarification Produit">
                 <sheet>
                     <div class="oe_title">
-                        <label for="code" class="oe_edit_only"/><h1><field name="code"/></h1>
-                        <label for="name" class="oe_edit_only"/><field name="name"/>
+                        <label for="code"/>
+                        <h1><field name="code"/></h1>
+                        <label for="name"/>
+                        <field name="name" placeholder="Nom du groupe"/>
                     </div>
                     <group>
-                        <field name="active"/>
-                        <field name="parent_id"/>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="parent_id"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
                     </group>
-                    <group string="Description"><field name="description" nolabel="1"/></group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" colspan="2" placeholder="Gamme concernée par ce groupe de tarification..."/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -41,13 +51,44 @@
     </record>
 
     <!-- Classes de Remise Exceptionnelle -->
-    <record id="view_product_discount_exceptional_tree" model="ir.ui.view">
+    <record id="view_product_discount_exceptional_list" model="ir.ui.view">
         <field name="name">product.discount.exceptional.list</field>
         <field name="model">product.discount.exceptional</field>
         <field name="arch" type="xml">
             <list string="Classes de Remise Exceptionnelle">
-                <field name="code"/><field name="name"/><field name="active"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active" column_invisible="1"/>
             </list>
+        </field>
+    </record>
+
+    <record id="view_product_discount_exceptional_form" model="ir.ui.view">
+        <field name="name">product.discount.exceptional.form</field>
+        <field name="model">product.discount.exceptional</field>
+        <field name="arch" type="xml">
+            <form string="Classe de Remise Exceptionnelle">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="code"/>
+                        <h1><field name="code"/></h1>
+                        <label for="name"/>
+                        <field name="name" placeholder="Nom de la classe"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="default_discount_rule_ids" widget="many2many_tags" placeholder="Remises appliquées par défaut"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 
@@ -58,13 +99,45 @@
     </record>
 
     <!-- Familles Promotionnelles -->
-    <record id="view_product_promotional_family_tree" model="ir.ui.view">
+    <record id="view_product_promotional_family_list" model="ir.ui.view">
         <field name="name">product.promotional.family.list</field>
         <field name="model">product.promotional.family</field>
         <field name="arch" type="xml">
             <list string="Familles Promotionnelles">
-                <field name="code"/><field name="name"/><field name="promotional_code"/><field name="active"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="promotional_code"/>
+                <field name="active" column_invisible="1"/>
             </list>
+        </field>
+    </record>
+
+    <record id="view_product_promotional_family_form" model="ir.ui.view">
+        <field name="name">product.promotional.family.form</field>
+        <field name="model">product.promotional.family</field>
+        <field name="arch" type="xml">
+            <form string="Famille Promotionnelle">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="code"/>
+                        <h1><field name="code"/></h1>
+                        <label for="name"/>
+                        <field name="name" placeholder="Nom de la famille"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="promotional_code"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 

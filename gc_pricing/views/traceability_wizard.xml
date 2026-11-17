@@ -27,9 +27,6 @@
                     </group>
                 </group>
 
-                <separator string="Détail Complet"/>
-                <field name="calculation_details" readonly="1"/>
-
                 <footer>
                     <button string="Fermer" special="cancel"/>
                 </footer>

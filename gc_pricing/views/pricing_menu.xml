@@ -59,7 +59,7 @@
     <menuitem id="menu_product_promotional_families"
               name="Familles Promotionnelles"
               parent="menu_product_pricing"
-              action="action_promotion_family_placeholder_fix"
+              action="action_product_promotional_family"
               sequence="30"/>
 
     <!-- Outils -->
