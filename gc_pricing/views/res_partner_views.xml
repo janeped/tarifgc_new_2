@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Partner Form Extension -->
-    <record id="view_partner_form_pricing_extension" model="ir.ui.view">
-        <field name="name">res.partner.form.pricing.extension</field>
+    <!-- Onglet Tarification dans la fiche client -->
+    <record id="view_partner_form_pricing_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.pricing.inherit</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='sales_purchases']" position="inside">
-                <group string="Segmentation Tarifaire">
+            <xpath expr="//notebook" position="inside">
+                <page string="Tarification GC" name="pricing_gc_tab">
                     <group>
-                        <field name="customer_segmentation_group_ids" widget="many2many_tags"/>
-                        <field name="customer_tariff_family_id"/>
-                        <field name="customer_exceptional_discount_class_id"/>
+                        <group string="Codes Tarifaires">
+                            <field name="customer_tariff_code"/>
+                            <field name="customer_promotional_tariff_code"/>
+                        </group>
+                        <group string="Segmentation">
+                            <field name="client_segmentation_group_ids" widget="many2many_tags"/>
+                            <field name="customer_tariff_family"/>
+                            <field name="customer_tariff_exceptional"/>
+                        </group>
                     </group>
-                </group>
+                </page>
             </xpath>
         </field>
     </record>

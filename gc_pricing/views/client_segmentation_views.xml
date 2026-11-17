@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Groupes de Clients -->
-    <record id="view_client_segmentation_group_tree" model="ir.ui.view">
+    <record id="view_client_segmentation_group_list" model="ir.ui.view">
         <field name="name">client.segmentation.group.list</field>
         <field name="model">client.segmentation.group</field>
         <field name="arch" type="xml">
@@ -10,69 +10,16 @@
                 <field name="code"/>
                 <field name="name"/>
                 <field name="type"/>
-                <field name="active"/>
+                <field name="active" column_invisible="1"/>
             </list>
         </field>
     </record>
 
     <record id="view_client_segmentation_group_form" model="ir.ui.view">
         <field name="name">client.segmentation.group.form</field>
-        <field name="model">client.segmentation.group</field>
-        <field name="arch" type="xml">
-            <form string="Groupe de Clients">
-                <sheet>
-                    <div class="oe_title">
-                        <label for="code" class="oe_edit_only"/><h1><field name="code"/></h1>
-                        <label for="name" class="oe_edit_only"/><field name="name"/>
+        <field name="model">client class system placeholder"
                     </div>
-                    <group>
-                        <field name="type"/>
-                        <field name="active"/>
-                        <field name="parent_id"/>
-                    </group>
-                    <group string="Description"><field name="description" nolabel="1"/></group>
                 </sheet>
             </form>
         </field>
     </record>
-
-    <record id="action_client_segmentation_group" model="ir.actions.act_window">
-        <field name="name">Groupes de Clients</field>
-        <field name="res_model">client.segmentation.group</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <!-- Familles Tarifaires Clients -->
-    <record id="view_client_tariff_family_tree" model="ir.ui.view">
-        <field name="name">client.tariff.family.list</field>
-        <field name="model">client.tariff.family</field>
-        <field name="arch" type="xml">
-            <list string="Familles Tarifaires Clients">
-                <field name="code"/><field name="name"/><field name="is_exceptional"/><field name="active"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="action_client_tariff_family" model="ir.actions.act_window">
-        <field name="name">Familles Tarifaires Clients</field>
-        <field name="res_model">client.tariff.family</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <!-- Classes de Remises Exceptionnelles -->
-    <record id="view_client_discount_exceptional_tree" model="ir.ui.view">
-        <field name="name">client.discount.exceptional.list</field>
-        <field name="model">client.discount.exceptional</field>
-        <field name="arch" type="xml">
-            <list string="Classes de Remises Exceptionnelles">
-                <field name="code"/><field name="name"/><field name="active"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="action_client_discount_exceptional" model="ir.actions.act_window">
-        <field name="name">Classes de Remises Clients</field>
-        <field name="res_model">client.discount.exceptional</field>
-        <field name="view_mode">list,form</field>
-    </record>
-</odoo>
