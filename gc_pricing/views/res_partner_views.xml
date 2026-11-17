@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Onglet Tarification dans la fiche client -->
+    <record id="view_partner_form_pricing_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.pricing.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Tarification" name="pricing_tab" groups="sales_team.group_sale_manager">
+                    <group>
+                        <group string="Codes Tarifaires">
+                            <field name="customer_tariff_code" placeholder="ex: TG, TS, CR, CU, BR..."/>
+                            <field name="customer_promotional_tariff_code" placeholder="ex: OLIM, BR..."/>
+                        </group>
+                        <group string="Segmentation">
+                            <field name="client_segmentation_group_ids" widget="many2many_tags"/>
+                            <field name="customer_tariff_family"/>
+                            <field name="customer_tariff_exceptional"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Codes Remises">
+                            <field name="customer_discount_code" placeholder="ex: RCREAREF, RCODIPPF..."/>
+                            <field name="customer_promotional_discount_code" placeholder="ex: RPCREARE, RPCULTUR..."/>
+                        </group>
+                        <group string="Classes de Remises">
+                            <field name="customer_discount_class"/>
+                            <field name="customer_exceptional_discount_class"/>
+                        </group>
+                    </group>
+                    <separator string="Remises par Défaut (Niveaux 1-3)"/>
+                    <group>
+                        <group string="Niveau 1">
+                            <field name="customer_default_discount_1" string="Remise %"/>
+                            <field name="customer_default_discount_1_mode" string="Mode"/>
+                        </group>
+                        <group string="Niveau 2">
+                            <field name="customer_default_discount_2" string="Remise %"/>
+                            <field name="customer_default_discount_2_mode" string="Mode"/>
+                        </group>
+                        <group string="Niveau 3">
+                            <field name="customer_default_discount_3" string="Remise %"/>
+                            <field name="customer_default_discount_3_mode" string="Mode"/>
+                        </group>
+                    </group>
+                    <separator string="Remise Exceptionnelle R99"/>
+                    <group>
+                        <group>
+                            <field name="customer_exceptional_r99" string="Remise R99 (%)"/>
+                            <field name="customer_r99_date_start"/>
+                        </group>
+                        <group>
+                            <field name="customer_r99_date_end"/>
+                        </group>
+                    </group>
+                    <separator string="Pied de Facture &amp; Préférences"/>
+                    <group>
+                        <group>
+                            <field name="customer_foot_invoice_discount" string="Remise Pied (%)"/>
+                            <field name="customer_price_decimal_precision"/>
+                        </group>
+                        <group>
+                            <field name="customer_rounding_method"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

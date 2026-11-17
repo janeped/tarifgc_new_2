@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension vue commande - onglet tarification -->
+    <record id="view_order_form_pricing_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.pricing.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree//field[@name='discount']" position="after">
+                <field name="pricing_rule_code" optional="show"/>
+                <field name="price_type_applied" optional="hide"/>
+                <field name="total_discount_percent" optional="hide"/>
+            </xpath>
+            
+            <xpath expr="//field[@name='order_line']/form//field[@name='discount']" position="after">
+                <separator string="Traçabilité Tarifaire"/>
+                <group>
+                    <group>
+                        <field name="pricing_rule_applied_id"/>
+                        <field name="pricing_rule_code"/>
+                        <field name="price_type_applied"/>
+                        <field name="promotion_applied_id"/>
+                    </group>
+                    <group>
+                        <field name="price_base"/>
+                        <field name="price_after_discounts"/>
+                        <field name="total_discount_percent"/>
+                        <field name="total_discount_amount"/>
+                    </group>
+                </group>
+                <group string="Remises par Niveau">
+                    <group>
+                        <field name="discount_rule_1_id"/>
+                    </group>
+                    <group>
+                        <field name="discount_rule_2_id"/>
+                    </group>
+                    <group>
+                        <field name="discount_rule_3_id"/>
+                    </group>
+                </group>
+                <group string="Date de Commande">
+                    <field name="order_date_override" help="Date de commande effective (peut être différente de la date de saisie)"/>
+                </group>
+                <button name="action_view_pricing_traceability" type="object" string="Voir Traçabilité Complète" class="btn-link" icon="fa-info-circle"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

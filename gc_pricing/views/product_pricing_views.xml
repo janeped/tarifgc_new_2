@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Groupes de Tarification Produits -->
+    <record id="view_product_pricing_group_tree" model="ir.ui.view">
+        <field name="name">product.pricing.group.tree</field>
+        <field name="model">product.pricing.group</field>
+        <field name="arch" type="xml">
+            <tree string="Groupes de Tarification Produits">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_product_pricing_group_form" model="ir.ui.view">
+        <field name="name">product.pricing.group.form</field>
+        <field name="model">product.pricing.group</field>
+        <field name="arch" type="xml">
+            <form string="Groupe de Tarification Produit">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="code" class="oe_edit_only"/><h1><field name="code"/></h1>
+                        <label for="name" class="oe_edit_only"/><field name="name"/>
+                    </div>
+                    <group>
+                        <field name="active"/>
+                        <field name="parent_id"/>
+                    </group>
+                    <group string="Description"><field name="description" nolabel="1"/></group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_pricing_group" model="ir.actions.act_window">
+        <field name="name">Groupes de Produits</field>
+        <field name="res_model">product.pricing.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Classes de Remises Produits -->
+    <record id="view_product_discount_exceptional_tree" model="ir.ui.view">
+        <field name="name">product.discount.exceptional.tree</field>
+        <field name="model">product.discount.exceptional</field>
+        <field name="arch" type="xml">
+            <tree string="Classes de Remises Produits">
+                <field name="code"/><field name="name"/><field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_discount_exceptional" model="ir.actions.act_window">
+        <field name="name">Classes de Remises Produits</field>
+        <field name="res_model">product.discount.exceptional</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

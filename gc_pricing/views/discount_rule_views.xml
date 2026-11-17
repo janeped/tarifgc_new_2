@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_discount_rule_tree" model="ir.ui.view">
+        <field name="name">discount.rule.tree</field>
+        <field name="model">discount.rule</field>
+        <field name="arch" type="xml">
+            <tree string="Règles de Remises">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="discount_type"/>
+                <field name="discount_value"/>
+                <field name="application_mode"/>
+                <field name="discount_level"/>
+                <field name="is_exclusive"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_discount_rule_form" model="ir.ui.view">
+        <field name="name">discount.rule.form</field>
+        <field name="model">discount.rule</field>
+        <field name="arch" type="xml">
+            <form string="Règle de Remise">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="code" class="oe_edit_only"/>
+                        <h1><field name="code" placeholder="ex: RCREAREF, RPCREARE, R99..."/></h1>
+                        <label for="name" class="oe_edit_only"/>
+                        <field name="name" placeholder="Nom de la remise"/>
+                    </div>
+                    <group>
+                        <group string="Configuration Remise">
+                            <field name="discount_type"/>
+                            <field name="discount_value"/>
+                            <field name="application_mode"/>
+                            <field name="discount_level"/>
+                            <field name="is_exclusive" string="Exclusive (R99)"/>
+                        </group>
+                        <group string="Période &amp; Priorité">
+                            <field name="priority"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Clients Éligibles" name="customers">
+                            <field name="customer_ids" widget="many2many_tags"/>
+                            <field name="customer_group_ids" widget="many2many_tags"/>
+                            <field name="customer_code_discount"/>
+                        </page>
+                        <page string="Produits Éligibles" name="products">
+                            <field name="product_ids" widget="many2many_tags"/>
+                            <field name="product_template_ids" widget="many2many_tags"/>
+                            <field name="product_category_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_discount_rule" model="ir.actions.act_window">
+        <field name="name">Règles de Remises</field>
+        <field name="res_model">discount.rule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

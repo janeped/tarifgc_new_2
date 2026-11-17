@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Formulaire du wizard de traçabilité -->
+    <record id="view_pricing_traceability_wizard_form" model="ir.ui.view">
+        <field name="name">pricing.traceability.wizard.form</field>
+        <field name="model">pricing.traceability.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Traçabilité du Calcul Tarifaire">
+                <group string="Contexte">
+                    <group>
+                        <field name="product_id"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="order_date"/>
+                        <field name="quantity"/>
+                    </group>
+                </group>
+                
+                <separator string="Détermination du Prix"/>
+                <group>
+                    <group string="Tarif">
+                        <field name="pricing_rule_code"/>
+                        <field name="pricing_rule_name"/>
+                        <field name="price_type"/>
+                        <field name="promotion_code"/>
+                        <field name="promotion_name"/>
+                        <field name="base_price"/>
+                    </group>
+                    <group string="Prix Final">
+                        <field name="total_discount_percent"/>
+                        <field name="total_discount_amount"/>
+                        <field name="final_price"/>
+                    </group>
+                </group>
+                
+                <separator string="Détail des Remises"/>
+                <group>
+                    <group>
+                        <field name="discount_line_1"/>
+                    </group>
+                    <group>
+                        <field name="discount_line_2"/>
+                    </group>
+                    <group>
+                        <field name="discount_line_3"/>
+                    </group>
+                </group>
+                
+                <separator string="Détail Complet"/>
+                <field name="calculation_details" readonly="1"/>
+                
+                <footer>
+                    <button string="Fermer" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

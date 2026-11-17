@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_pricing_exclusion_tree" model="ir.ui.view">
+        <field name="name">pricing.exclusion.tree</field>
+        <field name="model">pricing.exclusion</field>
+        <field name="arch" type="xml">
+            <tree string="Exclusions">
+                <field name="name"/>
+                <field name="exclusion_type"/>
+                <field name="priority"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_pricing_exclusion_form" model="ir.ui.view">
+        <field name="name">pricing.exclusion.form</field>
+        <field name="model">pricing.exclusion</field>
+        <field name="arch" type="xml">
+            <form string="Exclusion Commerciale">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Nom de l'exclusion"/></h1>
+                    </div>
+                    <group>
+                        <group string="Configuration">
+                            <field name="exclusion_type"/>
+                            <field name="priority"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Portée de l'Exclusion">
+                            <field name="exclude_from_all_discounts" string="Exclure de TOUTES les remises"/>
+                            <field name="exclude_from_all_promotions" string="Exclure de TOUTES les promotions"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Produits Exclus" name="products">
+                            <field name="product_ids" widget="many2many_tags"/>
+                            <field name="product_template_ids" widget="many2many_tags"/>
+                            <field name="product_category_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="Clients Exclus" name="customers">
+                            <field name="customer_ids" widget="many2many_tags"/>
+                            <field name="customer_group_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="Règles Exclues" name="excluded_rules">
+                            <field name="discount_rule_ids" widget="many2many_tags"/>
+                            <field name="promotion_ids" widget="many2many_tags"/>
+                            <field name="pricing_rule_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_pricing_exclusion" model="ir.actions.act_window">
+        <field name="name">Exclusions Commerciales</field>
+        <field name="res_model">pricing.exclusion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
