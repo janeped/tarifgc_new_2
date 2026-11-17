@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
+    <!-- List View -->
     <record id="view_pricing_promotion_tree" model="ir.ui.view">
-        <field name="name">pricing.promotion.tree</field>
+        <field name="name">pricing.promotion.list</field>
         <field name="model">pricing.promotion</field>
         <field name="arch" type="xml">
-            <tree string="Promotions">
+            <list string="Promotions">
                 <field name="code"/>
                 <field name="name"/>
                 <field name="promotion_type"/>
@@ -13,7 +13,7 @@
                 <field name="date_end"/>
                 <field name="priority"/>
                 <field name="active"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -70,6 +70,6 @@
     <record id="action_pricing_promotion" model="ir.actions.act_window">
         <field name="name">Promotions Commerciales</field>
         <field name="res_model">pricing.promotion</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>
