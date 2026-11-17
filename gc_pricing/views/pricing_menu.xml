@@ -40,16 +40,6 @@
               parent="menu_client_segmentation"
               action="action_client_segmentation_group"
               sequence="10"/>
-    <menuitem id="menu_client_tariff_families"
-              name="Familles Tarifaires"
-              parent="menu_client_segmentation"
-              action="action_client_tariff_family"
-              sequence="20"/>
-    <menuitem id="menu_client_tariff_exceptional"
-              name="Tarifs Exceptionnels"
-              parent="menu_client_segmentation"
-              action="action_client_tariff_exceptional"
-              sequence="30"/>
 
     <!-- Segmentation produits -->
     <menuitem id="menu_product_pricing"
@@ -69,7 +59,7 @@
     <menuitem id="menu_product_promotional_families"
               name="Familles Promotionnelles"
               parent="menu_product_pricing"
-              action="action_product_promotional_family"
+              action="action_promotion_family_placeholder_fix"
               sequence="30"/>
 
     <!-- Outils -->
