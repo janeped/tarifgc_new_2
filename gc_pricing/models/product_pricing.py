@@ -18,7 +18,8 @@ class ProductPricingGroup(models.Model):
     description = fields.Text(string='Description')
     parent_id = fields.Many2one('product.pricing.group', string='Groupe Parent')
     child_ids = fields.One2many('product.pricing.group', 'parent_id', string='Sous-groupes')
-    product_ids = fields.One2many('product.product', 'product_pricing_group_id', string='Produits')
+    # Suppression de product_ids : la relation est gérée par Many2many côté product.template
+    # product_ids = fields.One2many('product.product', 'product_pricing_group_id', string='Produits')
     company_id = fields.Many2one('res.company', string='Société',
                                  default=lambda self: self.env.company)
 
@@ -38,9 +39,8 @@ class ProductDiscountExceptional(models.Model):
     description = fields.Text(string='Description')
     default_discount_rule_ids = fields.Many2many('discount.rule',
                                                   string='Règles de Remise par Défaut')
-    product_ids = fields.One2many('product.product', 
-                                  'product_exceptional_discount_class_id',
-                                  string='Produits')
+    # Suppression de product_ids : la relation est gérée par Many2one côté product.template
+    # product_ids = fields.One2many('product.product', 'product_exceptional_discount_class_id', string='Produits')
     company_id = fields.Many2one('res.company', string='Société',
                                  default=lambda self: self.env.company)
 
@@ -59,9 +59,8 @@ class ProductPromotionalFamily(models.Model):
     active = fields.Boolean(default=True)
     description = fields.Text(string='Description')
     promotional_code = fields.Char(string='Code Promotionnel')
-    product_ids = fields.One2many('product.product',
-                                  'product_promotional_family_id',
-                                  string='Produits')
+    # Suppression de product_ids : la relation est gérée par Many2one côté product.template
+    # product_ids = fields.One2many('product.product', 'product_promotional_family_id', string='Produits')
     company_id = fields.Many2one('res.company', string='Société',
                                  default=lambda self: self.env.company)
 
