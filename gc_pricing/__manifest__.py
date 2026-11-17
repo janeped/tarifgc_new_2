@@ -13,12 +13,11 @@
         'product',
     ],
     'data': [
-        # 1. Charger d'abord les groupes de sécurité
+        # 1. Charger d'abord les groupes de sécurité (prérequis pour les accès)
         'security/pricing_security.xml',
-        # 2. Puis les règles d'accès (qui référencent les groupes)
-        'security/ir.model.access.csv',
-        # 3. Ensuite les autres données
-        'data/pricing_sequence.xml',
+        
+        # 2. Chargement des modèles via les vues (nécessaire avant le CSV)
+        # Les fichiers viewsXML chargent les modèles Python dans le registry
         'views/pricing_rule_views.xml',
         'views/discount_rule_views.xml',
         'views/promotion_views.xml',
@@ -32,6 +31,12 @@
         'views/pricing_menu.xml',
         'views/res_partner_views.xml',
         'views/product_template_views.xml',
+        
+        # 3. Séquences de données
+        'data/pricing_sequence.xml',
+        
+        # 4. FINALEMENT les règles d'accès (après que TOUS les modèles soient créés)
+        'security/ir.model.access.csv',
     ],
     'demo': ['data/demo_pricing_data.xml'],
     'installable': True,
