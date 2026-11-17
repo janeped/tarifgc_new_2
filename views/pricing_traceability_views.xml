@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Rapport de traçabilité -->
+    <record id="view_pricing_traceability_tree" model="ir.ui.view">
+        <field name="name">pricing.traceability.tree</field>
+        <field name="model">kit.component.traceability</field>
+        <field name="arch" type="xml">
+            <tree string="Traçabilité Composants Kits" create="false">
+                <field name="sale_line_id"/>
+                <field name="create_date"/>
+                <field name="component_prices_json" widget="json"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action pour historique -->
+    <record id="action_pricing_traceability" model="ir.actions.act_window">
+        <field name="name">Historique Traçabilité Kits</field>
+        <field name="res_model">kit.component.traceability</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

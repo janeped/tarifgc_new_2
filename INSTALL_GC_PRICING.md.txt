@@ -1,0 +1,36 @@
+# Procédure d'Installation - GC Pricing Engine
+
+## Étape 1 : Upload vers GitHub
+
+1. Va sur https://github.com/janeped/tarifgc
+2. Clique "Add file" → "Upload files"
+3. Glisse TOUS les fichiers du module
+4. Commit : "Ajout GC Pricing Engine v19.0.1.0.0 - Apik Centre Val de Loire"
+5. Push vers `main`
+
+## Étape 2 : odoo.sh
+
+1. Va sur https://www.odoo.sh
+2. Sélectionne ton projet `tarifgc`
+3. Onglet "Builds" → Le build se lance automatiquement
+4. Attendre le build vert (~5 min)
+5. Déployer
+
+## Étape 3 : Installation dans Odoo
+
+1. Ouvrir la base
+2. Activer mode développeur (Settings → Activate developer mode)
+3. Apps → Update Apps List
+4. Rechercher "GC Pricing"
+5. Installer
+
+## Étape 4 : Test
+
+1. Ventes → Commandes → Créer
+2. Client : C0000382 (Rougier & Plé)
+3. Produit : 133000 (CIRE PARAFFINE)
+4. Vérifier : Prix 7.76€ - 14% = 6.67€ HT
+
+## Support
+
+Apik Centre Val de Loire - 2026

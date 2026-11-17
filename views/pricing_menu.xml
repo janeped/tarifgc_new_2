@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu Principal APIC Pricing -->
+        <menuitem id="menu_apic_pricing_root"
+                  name="Tarification Avancée"
+                  parent="sale.sale_menu_root"
+                  sequence="50"
+                  groups="sales_team.group_sale_manager"/>
+
+        <!-- Menu Configuration -->
+        <menuitem id="menu_pricing_configuration"
+                  name="Configuration"
+                  parent="menu_apic_pricing_root"
+                  sequence="100"/>
+
+        <!-- ===== TARIFS ===== -->
+        <menuitem id="menu_pricing_rules"
+                  name="Règles Tarifaires"
+                  parent="menu_apic_pricing_root"
+                  action="action_pricing_rule"
+                  sequence="10"/>
+
+        <!-- ===== REMISES ===== -->
+        <menuitem id="menu_discount_rules"
+                  name="Règles de Remises"
+                  parent="menu_apic_pricing_root"
+                  action="action_discount_rule"
+                  sequence="20"/>
+
+        <!-- ===== PROMOTIONS ===== -->
+        <menuitem id="menu_promotions"
+                  name="Promotions"
+                  parent="menu_apic_pricing_root"
+                  action="action_pricing_promotion"
+                  sequence="30"/>
+
+        <!-- ===== EXCLUSIONS ===== -->
+        <menuitem id="menu_exclusions"
+                  name="Exclusions"
+                  parent="menu_apic_pricing_root"
+                  action="action_pricing_exclusion"
+                  sequence="40"/>
+
+        <!-- ===== SEGMENTATION ===== -->
+        <menuitem id="menu_segmentation"
+                  name="Segmentation"
+                  parent="menu_pricing_configuration"
+                  sequence="10"/>
+
+        <menuitem id="menu_client_groups"
+                  name="Groupes de Clients"
+                  parent="menu_segmentation"
+                  action="action_client_segmentation_group"
+                  sequence="10"/>
+
+        <menuitem id="menu_product_groups"
+                  name="Groupes de Produits"
+                  parent="menu_segmentation"
+                  action="action_product_pricing_group"
+                  sequence="50"/>
+
+        <!-- ===== OUTILS ===== -->
+        <menuitem id="menu_pricing_tools"
+                  name="Outils"
+                  parent="menu_apic_pricing_root"
+                  sequence="90"/>
+
+        <menuitem id="menu_pricing_simulation"
+                  name="Simulation Tarifaire"
+                  parent="menu_pricing_tools"
+                  action="action_pricing_simulation_wizard"
+                  sequence="10"/>
+
+        <menuitem id="menu_pricing_mass_import"
+                  name="Import en Masse"
+                  parent="menu_pricing_tools"
+                  action="action_pricing_mass_import_wizard"
+                  sequence="20"/>
+    </data>
+</odoo>

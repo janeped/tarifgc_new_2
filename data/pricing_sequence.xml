@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Séquence pour règles tarifaires -->
+    <record id="seq_pricing_rule" model="ir.sequence">
+        <field name="name">Séquence Règles Tarifaires GC</field>
+        <field name="code">pricing.rule</field>
+        <field name="prefix">PR-</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Séquence pour règles de remise -->
+    <record id="seq_discount_rule" model="ir.sequence">
+        <field name="name">Séquence Règles Remise GC</field>
+        <field name="code">discount.rule</field>
+        <field name="prefix">RM-</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Séquence pour promotions -->
+    <record id="seq_promotion" model="ir.sequence">
+        <field name="name">Séquence Promotions GC</field>
+        <field name="code">promotion</code>
+        <field name="prefix">PROMO-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>

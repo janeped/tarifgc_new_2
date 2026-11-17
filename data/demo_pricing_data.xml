@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==================== GROUPES CLIENTS ==================== -->
+    
+    <!-- Groupe CREAREF (Rougier & Plé) -->
+    <record id="client_group_crearef" model="client.group">
+        <field name="name">CREAREF - Groupement Rougier &amp; Plé</field>
+        <field name="code">CREAREF</field>
+        <field name="description">Groupement indépendant Rougier &amp; Plé</field>
+    </record>
+
+    <!-- Groupe CODIPA -->
+    <record id="client_group_codipa" model="client.group">
+        <field name="name">CODIPA - Centrales culturelles</field>
+        <field name="code">CODIPA</field>
+        <field name="description">Centrales d'achat culturelles</field>
+    </record>
+
+    <!-- Groupe CULTURA -->
+    <record id="client_group_cultura" model="client.group">
+        <field name="name">CULTURA - Réseau magasins</field>
+        <field name="code">CULTURA</field>
+        <field name="description">Réseau CULTURA France</field>
+    </record>
+
+    <!-- Groupe PICWIC -->
+    <record id="client_group_picwic" model="client.group">
+        <field name="name">PICWIC TOYS</field>
+        <field name="code">PICWIC</field>
+        <field name="description">Réseau Picwic Toys</field>
+    </record>
+
+    <!-- ==================== FAMILLES TARIFAIRES ==================== -->
+
+    <!-- Famille tarifaire PW-RAC -->
+    <record id="tariff_family_pw_rac" model="tariff_family">
+        <field name="name">PW-RAC - Famille tarifaire Rougier</field>
+        <field name="code">PW-RAC</field>
+    </record>
+
+    <!-- ==================== CLASSES DE REMISE EXCEPTIONNELLE ==================== -->
+
+    <record id="discount_class_crearef" model="exceptional_class">
+        <field name="name">CREAREF - Classe exceptionnelle Rougier &amp; Plé</field>
+        <field name="code">CREAREF</field>
+    </record>
+
+    <record id="discount_class_codipapf" model="exceptional_class">
+        <field name="name">CODIPAPF - Classe exceptionnelle CODIPA</field>
+        <field name="code">CODIPAPF</field>
+    </record>
+
+    <record id="discount_class_leclerc" model="exceptional_class">
+        <field name="name">LECLERC - Classe culturelle E.Leclerc</field>
+        <field name="code">LECLERC</field>
+    </record>
+
+    <record id="discount_class_picwic" model="exceptional_class">
+        <field name="name">PICWIC - Classe exceptionnelle Picwic</field>
+        <field name="code">PICWIC</field>
+    </record>
+
+    <record id="discount_class_epicerie" model="exceptional_class">
+        <field name="name">EPICERIE - Classe La Petite Épicerie</field>
+        <field name="code">EPICERIE</field>
+    </record>
+
+    <!-- ==================== RÈGLES TARIFAIRES (TG) ==================== -->
+
+    <!-- TG - CIRE PARAFFINE 1KG - 7.76€ HT Brut (01/02/26 - 30/09/26) -->
+    <record id="tg_133000_feb26_sep26" model="pricing.rule">
+        <field name="code">TG-133000-2026A</field>
+        <field name="name">TG Cire Paraffine 1kg - 7.76€ HT Brut</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">7.76</field>
+        <field name="priority">10</field>
+        <field name="date_start">2026-02-01</field>
+        <field name="date_end">2026-09-30</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- TG - CIRE PARAFFINE 1KG - 7.99€ HT Brut (01/10/26 - 31/01/28) -->
+    <record id="tg_133000_oct26_jan28" model="pricing.rule">
+        <field name="code">TG-133000-2026B</field>
+        <field name="name">TG Cire Paraffine 1kg - 7.99€ HT Brut</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">7.99</field>
+        <field name="priority">10</field>
+        <field name="date_start">2026-10-01</field>
+        <field name="date_end">2028-01-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- TG - LIVRE PYROGRAVURE - 17.51€ HT NET (non remisable) -->
+    <record id="tg_897261_net" model="pricing.rule">
+        <field name="code">TG-897261-NET</field>
+        <field name="name">TG Livre Pyrogravure - 17.51€ HT Net</field>
+        <field name="product_id" ref="product.product_product_897261"/>
+        <field name="price_type">net</field>
+        <field name="fixed_price">17.51</field>
+        <field name="priority">10</field>
+        <field name="date_start">2026-02-01</field>
+        <field name="date_end">2027-01-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- TG - FIMO GENERIQUE RFIMO454 - 9.07€ HT Brut -->
+    <record id="tg_rfimo454_brut" model="pricing.rule">
+        <field name="code">TG-RFIMO454</field>
+        <field name="name">TG Fimo Générique 454g - 9.07€ HT Brut</field>
+        <field name="product_id" ref="product.product_product_rfimo454"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">9.07</field>
+        <field name="priority">10</field>
+        <field name="date_start">2026-02-01</field>
+        <field name="date_end">2027-01-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- TG - COLIS POMPONS PLUMES - 57.00€ HT Brut (kit) -->
+    <record id="tg_750551_kit" model="pricing.rule">
+        <field name="code">TG-750551-KIT</field>
+        <field name="name">TG Colis Pompons Plumes - 57.00€ HT Brut</field>
+        <field name="product_id" ref="product.product_product_750551"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">57.00</field>
+        <field name="priority">10</field>
+        <field name="date_start">2026-02-01</field>
+        <field name="date_end">2027-01-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ==================== RÈGLES TARIFAIRES SPÉCIFIQUES (CR) ==================== -->
+
+    <!-- CR - CIRE PARAFFINE 1KG - 7.76€ HT Brut pour CREAREF (01/10/26 - 01/12/26) -->
+    <record id="cr_133000_crearef" model="pricing.rule">
+        <field name="code">CR-133000-CREAREF</field>
+        <field name="name">CR Cire Paraffine 1kg CREAREF - 7.76€ HT Brut</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">7.76</field>
+        <field name="priority">50</field>
+        <field name="date_start">2026-10-01</field>
+        <field name="date_end">2026-12-01</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- CU - CIRE PARAFFINE 1KG - 7.76€ HT Brut pour CULTURA (01/10/26 - 31/12/26) -->
+    <record id="cu_133000_cultura" model="pricing.rule">
+        <field name="code">CU-133000-CULTURA</field>
+        <field name="name">CU Cire Paraffine 1kg CULTURA - 7.76€ HT Brut</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_cultura'))]"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">7.76</field>
+        <field name="priority">50</field>
+        <field name="date_start">2026-10-01</field>
+        <field name="date_end">2026-12-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Tarif NET exceptionnel C0002628 - 5.00€ HT (01/10/26 - 31/12/26) -->
+    <record id="ts_133000_c0002628" model="pricing.rule">
+        <field name="code">TS-133000-C0002628</field>
+        <field name="name">TS C0002628 La Petite Épicerie - 5.00€ HT Net</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="partner_id" ref="base.res_partner_2628"/>
+        <field name="price_type">net</field>
+        <field name="fixed_price">5.00</field>
+        <field name="priority">50</field>
+        <field name="date_start">2026-10-01</field>
+        <field name="date_end">2026-12-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ==================== PROMOTIONS OLIM & BR ==================== -->
+
+    <!-- OLIM - CIRE PARAFFINE 1KG - 6.00€ HT Brut (15/08/26 uniquement) -->
+    <record id="olim_133000_aug15" model="promotion">
+        <field name="code">OLIM-133000-AUG26</field>
+        <field name="name">OLIM Été 2026 - Cire Paraffine 1kg</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="price_type">brut</field>
+        <field name="fixed_price">6.00</field>
+        <field name="priority">100</field>
+        <field name="date_start">2026-08-15 00:00:00</field>
+        <field name="date_end">2026-08-15 23:59:59</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- BR - CIRE PARAFFINE 1KG - 5.50€ HT NET pour BRICORAMA (15/08/26) -->
+    <record id="br_133000_bricorama" model="promotion">
+        <field name="code">BR-133000-BRICORAMA</field>
+        <field name="name">BR Bricorama - Cire Paraffine 1kg - 5.50€ HT Net</field>
+        <field name="product_id" ref="product.product_product_133000"/>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_bricorama'))]"/>
+        <field name="price_type">net</field>
+        <field name="fixed_price">5.50</field>
+        <field name="priority">100</field>
+        <field name="date_start">2026-08-15 00:00:00</field>
+        <field name="date_end">2026-08-15 23:59:59</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ==================== RÈGLES DE REMISE ==================== -->
+
+    <!-- RCREAREF - 14% pour groupe CREAREF -->
+    <record id="discount_rcrearef" model="discount.rule">
+        <field name="code">RCREAREF</field>
+        <field name="name">Remise CREAREF 14%</field>
+        <field name="discount_value">14.0</field>
+        <field name="application_mode">cumulative</field>
+        <field name="discount_level">1</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="active">True</field>
+    </record>
+
+    <!-- RPCREARE - 14% Niveau 1 pour CREAREF (période promo) -->
+    <record id="discount_rpcreare_l1" model="discount.rule">
+        <field name="code">RPCREARE-L1</field>
+        <field name="name">Promo CREAREF 14% Niveau 1</field>
+        <field name="discount_value">14.0</field>
+        <field name="application_mode">successive</field>
+        <field name="discount_level">1</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="date_start">2026-10-15</field>
+        <field name="date_end">2026-11-15</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- RPCREARE - 5% Niveau 2 pour CREAREF (1-99 pièces) -->
+    <record id="discount_rpcreare_l2_std" model="discount.rule">
+        <field name="code">RPCREARE-L2-STD</field>
+        <field name="name">Promo CREAREF 5% Niveau 2 (1-99 pcs)</field>
+        <field name="discount_value">5.0</field>
+        <field name="application_mode">successive</field>
+        <field name="discount_level">2</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="min_quantity">1</field>
+        <field name="max_quantity">99</field>
+        <field name="date_start">2026-10-15</field>
+        <field name="date_end">2026-11-15</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- RPCREARE - 7% Niveau 2 pour CREAREF (≥100 pièces) -->
+    <record id="discount_rpcreare_l2_qty100" model="discount.rule">
+        <field name="code">RPCREARE-L2-QTY100</field>
+        <field name="name">Promo CREAREF 7% Niveau 2 (≥100 pcs)</field>
+        <field name="discount_value">7.0</field>
+        <field name="application_mode">successive</field>
+        <field name="discount_level">2</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="min_quantity">100</field>
+        <field name="date_start">2026-10-15</field>
+        <field name="date_end">2026-11-15</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- RPICWIC - Remise PICWIC 15% -->
+    <record id="discount_rpicwic" model="discount.rule">
+        <field name="code">RPICWIC</field>
+        <field name="name">Remise PICWIC 15%</field>
+        <field name="discount_value">15.0</field>
+        <field name="application_mode">cumulative</field>
+        <field name="discount_level">1</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_picwic'))]"/>
+        <field name="active">True</field>
+    </record>
+
+    <!-- R99 - Remise exclusive 20% pour C0002159 (01/03/26 - 31/10/26) -->
+    <record id="discount_r99_c0002159" model="discount.rule">
+        <field name="code">R99-C0002159</field>
+        <field name="name">R99 Exclusive Rougier &amp; Plé Nîmes 20%</field>
+        <field name="discount_value">20.0</field>
+        <field name="application_mode">cumulative</field>
+        <field name="discount_level">1</field>
+        <field name="is_exclusive">True</field>
+        <field name="priority">999</field>
+        <field name="partner_id" ref="base.res_partner_2159"/>
+        <field name="date_start">2026-03-01</field>
+        <field name="date_end">2026-10-31</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Remise par défaut 13% pour CREAREF -->
+    <record id="discount_default_crearef_13" model="discount.rule">
+        <field name="code">DEF-CREAREF-13</field>
+        <field name="name">Remise par défaut CREAREF 13%</field>
+        <field name="discount_value">13.0</field>
+        <field name="application_mode">cumulative</field>
+        <field name="discount_level">1</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Remise par défaut 15% pour C0002628 -->
+    <record id="discount_default_c0002628_15" model="discount.rule">
+        <field name="code">DEF-C0002628-15</field>
+        <field name="name">Remise par défaut C0002628 15%</field>
+        <field name="discount_value">15.0</field>
+        <field name="application_mode">cumulative</field>
+        <field name="discount_level">1</field>
+        <field name="partner_id" ref="base.res_partner_2628"/>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ==================== EXCLUSIONS ==================== -->
+
+    <!-- Exemple : Exclure certains produits des remises CREAREF -->
+    <record id="exclusion_crearef_books" model="exclusion">
+        <field name="name">Exclusion Livres - CREAREF</field>
+        <field name="exclusion_type">product_category</field>
+        <field name="customer_group_ids" eval="[(4, ref('client_group_crearef'))]"/>
+        <field name="description">Gamme livres exclue des remises CREAREF (marges trop faibles)</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

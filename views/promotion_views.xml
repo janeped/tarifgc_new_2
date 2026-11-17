@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_pricing_promotion_tree" model="ir.ui.view">
+        <field name="name">pricing.promotion.tree</field>
+        <field name="model">pricing.promotion</field>
+        <field name="arch" type="xml">
+            <tree string="Promotions">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="promotion_type"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="priority"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_pricing_promotion_form" model="ir.ui.view">
+        <field name="name">pricing.promotion.form</field>
+        <field name="model">pricing.promotion</field>
+        <field name="arch" type="xml">
+            <form string="Promotion Commerciale">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="code" class="oe_edit_only"/>
+                        <h1><field name="code" placeholder="ex: OLIM, BR, RPCREARE..."/></h1>
+                        <label for="name" class="oe_edit_only"/>
+                        <field name="name" placeholder="Nom de la promotion"/>
+                    </div>
+                    <group>
+                        <group string="Période de Validité">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="priority"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Type de Promotion">
+                            <field name="promotion_type"/>
+                            <field name="exclude_from_standard_discounts"/>
+                            <field name="replaces_base_price"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Clients Éligibles" name="customers">
+                            <field name="is_available_to_all" string="Disponible à tous les clients"/>
+                            <field name="customer_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all', '=', True)]}"/>
+                            <field name="customer_group_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all', '=', True)]}"/>
+                        </page>
+                        <page string="Produits Éligibles" name="products">
+                            <field name="is_available_to_all_products" string="Disponible sur tous les produits"/>
+                            <field name="product_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all_products', '=', True)]}"/>
+                            <field name="product_category_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all_products', '=', True)]}"/>
+                        </page>
+                        <page string="Tarif Promotionnel" name="pricing">
+                            <field name="promo_price_type"/>
+                            <field name="promo_fixed_price" attrs="{'invisible': [('promo_price_type', '!=', 'fixed')]}"/>
+                            <field name="promo_discount_percent" attrs="{'invisible': [('promo_price_type', '!=', 'discount_percent')]}"/>
+                            <field name="promo_is_net_price"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_pricing_promotion" model="ir.actions.act_window">
+        <field name="name">Promotions Commerciales</field>
+        <field name="res_model">pricing.promotion</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

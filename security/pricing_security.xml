@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Catégorie technique -->
+    <record id="module_category_pricing" model="ir.module.category">
+        <field name="name">GC Pricing Engine</field>
+        <field name="description">Gestion des tarifs, remises et promotions Graine Créative</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- Groupe Administrateur Tarification -->
+    <record id="group_pricing_admin" model="res.groups">
+        <field name="name">Administrateur Tarification</field>
+        <field name="category_id" ref="module_category_pricing"/>
+        <field name="implied_ids" eval="[(4, ref('group_pricing_manager'))]"/>
+        <field name="comment">Accès complet : création, modification, suppression de toutes les règles tarifaires, import masse, configuration.</field>
+    </record>
+
+    <!-- Groupe Gestionnaire Tarification -->
+    <record id="group_pricing_manager" model="res.groups">
+        <field name="name">Gestionnaire Tarification</field>
+        <field name="category_id" ref="module_category_pricing"/>
+        <field name="implied_ids" eval="[(4, ref('group_pricing_viewer'))]"/>
+        <field name="comment">Création et modification des règles, consultations, simulations. Pas de suppression ni d'import masse.</field>
+    </record>
+
+    <!-- Groupe Lecteur Tarification -->
+    <record id="group_pricing_viewer" model="res.groups">
+        <field name="name">Lecteur Tarification</field>
+        <field name="category_id" ref="module_category_pricing"/>
+        <field name="comment">Consultation seule des règles tarifaires, promotions, exclusions. Accès aux wizards de simulation et traçabilité.</field>
+    </record>
+</odoo>
