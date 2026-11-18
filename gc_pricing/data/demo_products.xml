@@ -16,7 +16,6 @@
         <field name="standard_price">5.00</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Cire paraffine prête à l'emploi en sachet de 1kg</field>
     </record>
 
@@ -30,7 +29,6 @@
         <field name="standard_price">15.00</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Livre de pyrogravure - Tarif NET non remisable</field>
     </record>
 
@@ -44,7 +42,6 @@
         <field name="standard_price">6.50</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Fimo générique 454g - Référence de pilotage pour déclinaisons</field>
     </record>
 
@@ -58,7 +55,6 @@
         <field name="standard_price">6.50</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Fimo Pro 454g Lavande - Piloté par référence RFIMO454</field>
     </record>
 
@@ -72,7 +68,6 @@
         <field name="standard_price">6.50</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Fimo Pro 454g Gris Dauphin - Piloté par référence RFIMO454</field>
     </record>
 
@@ -86,7 +81,6 @@
         <field name="standard_price">40.00</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Colis pompons plumes - Article composé de 8 composants</field>
     </record>
 
@@ -100,7 +94,6 @@
         <field name="standard_price">7.00</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="categ_id" ref="product.product_category_all"/>
         <field name="description_sale">Storage Box E-COM08</field>
     </record>
 </odoo>
