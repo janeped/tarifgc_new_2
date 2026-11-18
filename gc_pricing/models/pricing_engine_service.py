@@ -124,32 +124,37 @@ class PricingEngineService(models.AbstractModel):
                 'promotion': best_promo,
             }
         
-        # 2. Préparer la date pour comparaison (format string YYYY-MM-DD)
-        if hasattr(order_date, 'date'):
-            check_date_str = order_date.date().strftime('%Y-%m-%d')
+        # 2. Préparer la date pour comparaison (format DATE, pas STRING)
+        if isinstance(order_date, datetime):
+            check_date = order_date.date()
+        elif isinstance(order_date, date):
+            check_date = order_date
         else:
-            check_date_str = order_date.strftime('%Y-%m-%d') if isinstance(order_date, datetime) else order_date
+            # Fallback: convertir string en date
+            try:
+                check_date = datetime.strptime(order_date, '%Y-%m-%d').date()
+            except (ValueError, TypeError):
+                check_date = date.today()
         
-        _logger.debug(f"[APIC Pricing] check_date_str={check_date_str}")
+        _logger.debug(f"[APIC Pricing] check_date={check_date}")
         
         # 3. Chercher TOUTES les règles actives, puis filtrer par date en Python
-        # NOTE: Les domaines [('date_end', '=', False)] ne marchent pas car les champs Date vides sont NULL, pas False
         pricing_rule_model = self.env['pricing.rule']
         all_rules_active = pricing_rule_model.search([
             ('active', '=', True),
         ], order='priority desc, date_start desc')
         
-        # Filtrer par validité temporelle en Python (plus fiable que les domaines Odoo pour NULL)
+        # Filtrer par validité temporelle en Python (comparaison de dates, pas strings)
         all_rules = []
         for rule in all_rules_active:
             # Check date_start: doit être <= aujourd'hui OU vide/non défini
-            if rule.date_start and rule.date_start > check_date_str:
-                _logger.debug(f"[APIC Pricing] Règle {rule.code} exclue: date_start {rule.date_start} > {check_date_str}")
+            if rule.date_start and rule.date_start > check_date:
+                _logger.debug(f"[APIC Pricing] Règle {rule.code} exclue: date_start {rule.date_start} > {check_date}")
                 continue
             
             # Check date_end: doit être >= aujourd'hui OU vide/non défini
-            if rule.date_end and rule.date_end < check_date_str:
-                _logger.debug(f"[APIC Pricing] Règle {rule.code} exclue: date_end {rule.date_end} < {check_date_str}")
+            if rule.date_end and rule.date_end < check_date:
+                _logger.debug(f"[APIC Pricing] Règle {rule.code} exclue: date_end {rule.date_end} < {check_date}")
                 continue
             
             all_rules.append(rule)
@@ -292,6 +297,11 @@ class PricingEngineService(models.AbstractModel):
     def _get_r99_discounts(self, partner, order_date, product):
         """Récupère la remise exceptionnelle R99 si applicable."""
         check_date = order_date.date() if hasattr(order_date, 'date') else order_date
+        if isinstance(check_date, str):
+            try:
+                check_date = datetime.strptime(check_date, '%Y-%m-%d').date()
+            except (ValueError, TypeError):
+                check_date = date.today()
         
         r99_percent = partner.customer_exceptional_r99
         if r99_percent <= 0:
