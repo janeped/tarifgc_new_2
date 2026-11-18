@@ -59,12 +59,16 @@ class PricingSimulationWizard(models.TransientModel):
         if not discount_text:
             discount_text = "Aucune remise applicable"
         
+        traceability = result.get('traceability') or {}
+        rule_info = traceability.get('pricing_rule') or {}
+        promo_info = traceability.get('promotion') or {}
+        
         self.write({
             'base_price': result.get('base_price', 0.0),
             'pricing_rule_code': result.get('rule_code', ''),
-            'pricing_rule_name': result.get('traceability', {}).get('pricing_rule', {}).get('name', ''),
+            'pricing_rule_name': rule_info.get('name', ''),
             'price_type': result.get('price_type', 'brut'),
-            'promotion_applied': result.get('traceability', {}).get('promotion', {}).get('code', '') or '-',
+            'promotion_applied': promo_info.get('code', '') or '-',
             'discount_details': discount_text,
             'total_discount_percent': result.get('total_discount_percent', 0.0),
             'final_price': result.get('final_price', 0.0),
