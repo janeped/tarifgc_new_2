@@ -8,8 +8,8 @@ def _match_customer(self, partner):
         if partner in self.customer_ids:
             return True
         
-        partner_groups = partner.client_segmentation_group_ids or self.env['client.segmentation.group']
-        if self.customer_group_ids & partner_groups:
+        partner_groups = partner.client_segmentation_group_ids
+        if partner_groups and self.customer_group_ids & partner_groups:
             return True
         
         if self.customer_tariff_family and partner.customer_tariff_family == self.customer_tariff_family:
