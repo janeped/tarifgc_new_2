@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'GC Pricing Engine',
-    'version': '19.0.1.2.0',
+    'version': '19.0.1.2.1',
     'category': 'Sales/Sales',
     'summary': 'Moteur de tarification avancé pour Graine Créative - Gestion des tarifs, remises et promotions multi-niveaux',
     'author': 'Apik Centre Val de Loire',
@@ -28,6 +28,9 @@
         'data/pricing_sequence.xml',
         'data/pricing_rule_data.xml',  # Règles tarifaires requises (dont TG générale)
         'security/ir.model.access.csv',
+    ],
+    'demo': [
+        'data/demo_pricing_data.xml',  # Données démo (chargées uniquement avec --load-demo)
     ],
     'installable': True,
     'application': True,
