@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==================== RÈGLE TARIFAIRE GÉNÉRALE TG ==================== -->
+    
+    <!-- 
+        TG - Tarif Général par défaut
+        S'applique à TOUS les produits et TOUS les clients
+        Prix fixe: 12.50€ HT Brut
+        
+        Cette règle est le "filet de sécurité" qui s'applique quand aucune
+        règle spécifique (produit, client, promotion) ne matche.
+        
+        NOTE: Pas de product_ids ni customer_ids → s'applique universellement
+    -->
+    <record id="tg_general_default" model="pricing.rule">
+        <field name="code">TG</field>
+        <field name="name">TG - Tarif Général par défaut</field>
+        <field name="price_type">brut</field>
+        <field name="currency_id" ref="base.EUR"/>
+        <field name="is_ht" eval="True"/>
+        <field name="fixed_price">12.50</field>
+        <field name="priority">10</field>
+        <field name="date_start">2024-01-01</field>
+        <field name="date_end">2027-12-31</field>
+        <field name="active" eval="True"/>
+        <!-- Pas de critères produits/clients → s'applique à tous -->
+    </record>
+
+    <!-- ==================== GROUPES CLIENTS (démo) ==================== -->
+    
+    <record id="client_group_crearef" model="client.segmentation.group">
+        <field name="name">CREAREF - Groupement Rougier &amp; Plé</field>
+        <field name="code">CREAREF</field>
+        <field name="type">customer</field>
+        <field name="description">Groupement indépendant Rougier &amp; Plé</field>
+    </record>
+
+    <record id="client_group_codipa" model="client.segmentation.group">
+        <field name="name">CODIPA - Centrales culturelles</field>
+        <field name="code">CODIPA</field>
+        <field name="type">customer</field>
+        <field name="description">Centrales d'achat culturelles</field>
+    </record>
+
+    <!-- ==================== FAMILLES TARIFAIRES CLIENTS (démo) ==================== -->
+
+    <record id="tariff_family_pw_rac" model="client.tariff.family">
+        <field name="name">PW-RAC - Famille tarifaire Rougier</field>
+        <field name="code">PW-RAC</field>
+    </record>
+
+    <!-- ==================== CLASSES DE REMISE EXCEPTIONNELLE (démo) ==================== -->
+
+    <record id="discount_class_crearef" model="client.discount.exceptional">
+        <field name="name">CREAREF - Classe exceptionnelle Rougier &amp; Plé</field>
+        <field name="code">CREAREF</field>
+    </record>
+</odoo>
