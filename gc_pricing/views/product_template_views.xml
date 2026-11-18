@@ -14,6 +14,19 @@
                             <field name="product_exceptional_discount_class_id"/>
                             <field name="product_promotional_family_id"/>
                         </group>
+                        <group string="Pilotage par Référence">
+                            <field name="use_reference_pricing"/>
+                            <field name="reference_product_id" invisible="not use_reference_pricing" required="use_reference_pricing"/>
+                        </group>
+                        <group string="Comportement Tarifaire">
+                            <field name="price_type_default"/>
+                            <field name="exclude_from_all_discounts"/>
+                            <field name="exclude_from_promotions"/>
+                        </group>
+                        <group string="Kits Composites">
+                            <field name="is_kit_composite"/>
+                            <field name="kit_valuation_method" invisible="not is_kit_composite"/>
+                        </group>
                     </group>
                 </page>
             </xpath>
