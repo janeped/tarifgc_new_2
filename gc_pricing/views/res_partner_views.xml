@@ -1,19 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Partner Form Extension -->
-    <record id="view_partner_form_pricing_extension" model="ir.ui.view">
-        <field name="name">res.partner.form.pricing.extension</field>
+    <!-- Onglet Tarification GC dans la fiche client -->
+    <record id="view_partner_form_pricing_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.pricing.inherit</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='sales_purchases']" position="inside">
-                <group string="Segmentation Tarifaire">
+            <xpath expr="//notebook" position="inside">
+                <page string="Tarification GC" name="pricing_gc_tab" groups="sales_team.group_sale_manager">
                     <group>
-                        <field name="customer_segmentation_group_ids" widget="many2many_tags"/>
-                        <field name="customer_tariff_family_id"/>
-                        <field name="customer_exceptional_discount_class_id"/>
+                        <group string="Codes Tarifaires">
+                            <field name="customer_tariff_code"/>
+                            <field name="customer_promotional_tariff_code"/>
+                        </group>
+                        <group string="Segmentation">
+                            <field name="client_segmentation_group_ids" widget="many2many_tags"/>
+                            <field name="customer_tariff_family"/>
+                            <field name="customer_tariff_exceptional"/>
+                        </group>
+                        <group string="Codes Remises">
+                            <field name="customer_discount_code"/>
+                            <field name="customer_promotional_discount_code"/>
+                        </group>
+                        <group string="Classes de Remises">
+                            <field name="customer_discount_class"/>
+                            <field name="customer_exceptional_discount_class"/>
+                        </group>
+                        <group string="Remises par Défaut (Niveaux 1-3)">
+                            <field name="customer_default_discount_1"/>
+                            <field name="customer_default_discount_2"/>
+                            <field name="customer_default_discount_3"/>
+                        </group>
+                        <group string="R99 - Remise Exceptionnelle Exclusive">
+                            <field name="customer_exceptional_r99"/>
+                            <field name="customer_r99_date_start"/>
+                            <field name="customer_r99_date_end"/>
+                        </group>
+                        <group string="Pied de Facture &amp; Préférences">
+                            <field name="customer_foot_invoice_discount"/>
+                            <field name="customer_price_decimal_precision"/>
+                            <field name="customer_rounding_method"/>
+                        </group>
                     </group>
-                </group>
+                </page>
             </xpath>
         </field>
     </record>

@@ -6,6 +6,7 @@
         <field name="model">pricing.simulation.wizard</field>
         <field name="arch" type="xml">
             <form string="Simulation Tarifaire">
+                <field name="state" invisible="1"/>
                 <group string="Paramètres de Simulation">
                     <group>
                         <field name="partner_id"/>
@@ -16,10 +17,9 @@
                         <field name="quantity"/>
                     </group>
                 </group>
-                
-                <separator string="Résultats du Calcul" attrs="{'invisible': [('state', '=', 'draft')]}"/>
-                
-                <group attrs="{'invisible': [('state', '=', 'draft')]}">
+
+                <separator string="Résultats du Calcul" invisible="state == 'draft'"/>
+                <group invisible="state == 'draft'">
                     <group string="Tarif Appliqué">
                         <field name="base_price"/>
                         <field name="pricing_rule_code"/>
@@ -29,21 +29,21 @@
                     </group>
                     <group string="Remises">
                         <field name="total_discount_percent"/>
-                        <field name="discount_details"/>
+                        <field name="discount_details" nolabel="1" colspan="2"/>
                     </group>
                 </group>
-                
-                <group class="oe_subtotal_footer oe_right" attrs="{'invisible': [('state', '=', 'draft')]}">
-                    <div class="oe_subtotal_footer_separator oe_inline">Prix Final</div>
+
+                <group class="oe_subtotal_footer oe_right" invisible="state == 'draft'">
+                    <div class="oe_subtotal_footer_separator oe_inline">Prix Final Unitaire</div>
                     <field name="final_price" class="oe_subtotal_footer_separator"/>
                     <separator/>
                     <div class="oe_subtotal_footer_separator oe_inline">Total Ligne</div>
                     <field name="final_total" class="oe_subtotal_footer_separator"/>
                 </group>
-                
+
                 <footer>
-                    <button name="action_calculate" type="object" string="Calculer" class="btn-primary" states="draft"/>
-                    <button name="action_new_simulation" type="object" string="Nouvelle Simulation" class="btn-secondary" states="calculated"/>
+                    <button name="action_calculate" type="object" string="Calculer" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_new_simulation" type="object" string="Nouvelle Simulation" class="btn-secondary" invisible="state != 'calculated'"/>
                     <button string="Fermer" class="btn-default" special="cancel"/>
                 </footer>
             </form>

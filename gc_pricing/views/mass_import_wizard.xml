@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pricing_mass_import_wizard_form" model="ir.ui.view">
+        <field name="name">pricing.mass.import.wizard.form</field>
+        <field name="model">pricing.mass.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import en Masse">
+                <group>
+                    <group>
+                        <field name="import_type"/>
+                        <field name="file_name"/>
+                    </group>
+                    <group>
+                        <field name="file_data" filename="file_name"/>
+                        <field name="delimiter"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_import" type="object" string="Importer" class="btn-primary"/>
+                    <button string="Annuler" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pricing_mass_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import en Masse</field>
+        <field name="res_model">pricing.mass.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

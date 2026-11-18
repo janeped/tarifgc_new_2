@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- List View -->
-    <record id="view_pricing_promotion_tree" model="ir.ui.view">
+    <record id="view_pricing_promotion_list" model="ir.ui.view">
         <field name="name">pricing.promotion.list</field>
         <field name="model">pricing.promotion</field>
         <field name="arch" type="xml">
@@ -12,12 +11,11 @@
                 <field name="date_start"/>
                 <field name="date_end"/>
                 <field name="priority"/>
-                <field name="active"/>
+                <field name="active" column_invisible="1"/>
             </list>
         </field>
     </record>
 
-    <!-- Form View -->
     <record id="view_pricing_promotion_form" model="ir.ui.view">
         <field name="name">pricing.promotion.form</field>
         <field name="model">pricing.promotion</field>
@@ -25,50 +23,78 @@
             <form string="Promotion Commerciale">
                 <sheet>
                     <div class="oe_title">
-                        <label for="code" class="oe_edit_only"/>
+                        <label for="code"/>
                         <h1><field name="code" placeholder="ex: OLIM, BR, RPCREARE..."/></h1>
-                        <label for="name" class="oe_edit_only"/>
+                        <label for="name"/>
                         <field name="name" placeholder="Nom de la promotion"/>
                     </div>
                     <group>
-                        <group string="Période de Validité">
+                        <group string="Période (obligatoire)">
                             <field name="date_start"/>
                             <field name="date_end"/>
-                            <field name="priority"/>
-                            <field name="active"/>
                         </group>
-                        <group string="Type de Promotion">
+                        <group string="Priorité">
+                            <field name="priority"/>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+
+                    <separator string="Type de Promotion"/>
+                    <group>
+                        <group>
                             <field name="promotion_type"/>
                             <field name="exclude_from_standard_discounts"/>
                             <field name="replaces_base_price"/>
                         </group>
+                        <group>
+                            <field name="is_available_to_all"/>
+                            <field name="is_available_to_all_products"/>
+                        </group>
                     </group>
-                    <notebook>
-                        <page string="Clients Éligibles" name="customers">
-                            <field name="is_available_to_all" string="Disponible à tous les clients"/>
-                            <field name="customer_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all', '=', True)]}"/>
-                            <field name="customer_group_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all', '=', True)]}"/>
-                        </page>
-                        <page string="Produits Éligibles" name="products">
-                            <field name="is_available_to_all_products" string="Disponible sur tous les produits"/>
-                            <field name="product_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all_products', '=', True)]}"/>
-                            <field name="product_category_ids" widget="many2many_tags" attrs="{'invisible': [('is_available_to_all_products', '=', True)]}"/>
-                        </page>
-                        <page string="Tarif Promotionnel" name="pricing">
+
+                    <separator string="Tarif Promotionnel" invisible="promotion_type not in ('price', 'both')"/>
+                    <group invisible="promotion_type not in ('price', 'both')">
+                        <group>
                             <field name="promo_price_type"/>
-                            <field name="promo_fixed_price" attrs="{'invisible': [('promo_price_type', '!=', 'fixed')]}"/>
-                            <field name="promo_discount_percent" attrs="{'invisible': [('promo_price_type', '!=', 'discount_percent')]}"/>
+                            <field name="promo_fixed_price" invisible="promo_price_type != 'fixed'"/>
+                            <field name="promo_discount_percent" invisible="promo_price_type != 'discount_percent'"/>
+                            <field name="promo_discount_amount" invisible="promo_price_type != 'discount_fixed'"/>
+                            <field name="promo_currency_id" invisible="promo_price_type != 'discount_fixed'" groups="base.group_multi_currency"/>
                             <field name="promo_is_net_price"/>
-                        </page>
-                    </notebook>
+                        </group>
+                    </group>
+
+                    <separator string="Éligibilité Clients" invisible="is_available_to_all"/>
+                    <group invisible="is_available_to_all">
+                        <group>
+                            <field name="customer_ids" widget="many2many_tags"/>
+                            <field name="customer_group_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+
+                    <separator string="Produits Concernés" invisible="is_available_to_all_products"/>
+                    <group invisible="is_available_to_all_products">
+                        <group>
+                            <field name="product_ids" widget="many2many_tags"/>
+                            <field name="product_template_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="product_category_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+
+                    <group string="Commentaire">
+                        <field name="note" nolabel="1" colspan="2" placeholder="Commentaire interne..."/>
+                    </group>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
 
-    <!-- Action -->
     <record id="action_pricing_promotion" model="ir.actions.act_window">
-        <field name="name">Promotions Commerciales</field>
+        <field name="name">Promotions</field>
         <field name="res_model">pricing.promotion</field>
         <field name="view_mode">list,form</field>
     </record>

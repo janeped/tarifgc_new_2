@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Product Template Form Extension -->
+    <!-- Onglet Tarification GC dans la fiche produit -->
     <record id="view_product_template_form_pricing_extension" model="ir.ui.view">
         <field name="name">product.template.form.pricing.extension</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='options']" position="inside">
-                <div>
-                    <field name="product_pricing_group_ids" widget="many2many_tags" placeholder="Groupes de Tarification"/>
-                    <field name="product_exceptional_discount_class_id"/>
-                    <field name="product_promotional_family_id"/>
-                </div>
+            <xpath expr="//notebook" position="inside">
+                <page string="Tarification GC" name="pricing_gc_tab">
+                    <group>
+                        <group string="Segmentation Produit">
+                            <field name="product_pricing_group_ids" widget="many2many_tags" placeholder="ex: PERCHES, LIVRES..."/>
+                            <field name="product_exceptional_discount_class_id"/>
+                            <field name="product_promotional_family_id"/>
+                        </group>
+                        <group string="Pilotage par Référence">
+                            <field name="use_reference_pricing"/>
+                            <field name="reference_product_id" invisible="not use_reference_pricing" required="use_reference_pricing"/>
+                        </group>
+                        <group string="Comportement Tarifaire">
+                            <field name="price_type_default"/>
+                            <field name="exclude_from_all_discounts"/>
+                            <field name="exclude_from_promotions"/>
+                        </group>
+                        <group string="Kits Composites">
+                            <field name="is_kit_composite"/>
+                            <field name="kit_valuation_method" invisible="not is_kit_composite"/>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>
