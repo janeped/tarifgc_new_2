@@ -35,7 +35,7 @@ class DiscountRule(models.Model):
     application_mode = fields.Selection([
         ('cumulative', 'Cumulative (additionnée)'),
         ('successive', 'Successive (en cascade)'),
-    ], string='Mode d\'Application', default='successive', required=True)
+    ], string="Mode d'Application", default='successive', required=True)
     
     discount_level = fields.Integer(string='Niveau de Remise', default=1)
     
@@ -151,7 +151,7 @@ class DiscountRule(models.Model):
         if rule.product_group_ids & product.product_pricing_group_ids:
             return True
         
-        if rule.product_exceptional_class and product.product_exceptional_discount_class == rule.product_exceptional_class:
+        if rule.product_exceptional_class and product.product_exceptional_discount_class_id == rule.product_exceptional_class:
             return True
         
         return False
