@@ -26,7 +26,7 @@
         'views/mass_import_wizard.xml',
         'views/pricing_menu.xml',
         'data/pricing_sequence.xml',
-        'data/demo_pricing_data.xml',  # Règles tarifaires démo dont TG générale
+        'data/pricing_rule_data.xml',  # Règles tarifaires requises (dont TG générale)
         'security/ir.model.access.csv',
     ],
     'installable': True,
