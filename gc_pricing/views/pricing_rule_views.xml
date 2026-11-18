@@ -47,7 +47,7 @@
                     <group>
                         <group>
                             <field name="use_reference_price"/>
-                            <field name="reference_product_id" invisible="not use_reference_price" required="use_reference_pricing or use_reference_price"/>
+                            <field name="reference_product_id" invisible="not use_reference_price" required="use_reference_price"/>
                             <field name="fixed_price" invisible="use_reference_price"/>
                             <field name="is_degressive" invisible="use_reference_price"/>
                         </group>
