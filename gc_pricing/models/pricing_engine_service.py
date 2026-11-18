@@ -123,50 +123,51 @@ class PricingEngineService(models.AbstractModel):
                 'promotion': best_promo,
             }
         
-        # 2. Chercher tarif spécifique client (CR, CU, TS)
+        # 2. Préparer la date pour comparaison (format string YYYY-MM-DD)
+        if hasattr(order_date, 'date'):
+            check_date_str = order_date.date().strftime('%Y-%m-%d')
+        else:
+            check_date_str = order_date.strftime('%Y-%m-%d') if isinstance(order_date, datetime) else order_date
+        
+        # 3. Chercher TOUTES les règles actives et valides, puis filtrer
+        pricing_rule_model = self.env['pricing.rule']
+        all_rules = pricing_rule_model.search([
+            ('active', '=', True),
+            '|', ('date_start', '<=', check_date_str),
+            ('date_start', '=', False),
+            '|', ('date_end', '>=', check_date_str),
+            ('date_end', '=', False),
+        ], order='priority desc, date_start desc')
+        
+        # 4. Filtrer par code tarifaire du client (priorité aux codes spécifiques)
         tariff_code = partner.customer_tariff_code or 'TG'
         
-        pricing_rule_model = self.env['pricing.rule']
-        specific_rule = pricing_rule_model.search([
-            ('code', '=', tariff_code),
-            ('active', '=', True),
-            '|', ('date_start', '<=', order_date.date() if hasattr(order_date, 'date') else order_date),
-            ('date_start', '=', False),
-            '|', ('date_end', '>=', order_date.date() if hasattr(order_date, 'date') else order_date),
-            ('date_end', '=', False),
-        ], limit=1, order='priority desc, date_start desc')
+        # 4a. Chercher d'abord une règle avec le code exact du client
+        for rule in all_rules:
+            if rule.code == tariff_code and rule.code != 'TG':
+                if pricing_rule_model._match_product(rule, product) and pricing_rule_model._match_customer(rule, partner):
+                    price = rule._calculate_price(product, quantity, order_date)
+                    return {
+                        'price': price,
+                        'rule': rule,
+                        'price_type': rule.price_type,
+                        'promotion': None,
+                    }
         
-        if specific_rule and specific_rule.code != 'TG':
-            if pricing_rule_model._match_product(specific_rule, product):
-                price = specific_rule._calculate_price(product, quantity, order_date)
+        # 4b. Si pas trouvé, chercher TG (s'applique à tous si pas de critères clients)
+        tg_rule = all_rules.filtered(lambda r: r.code == 'TG')
+        for rule in tg_rule:
+            # Pour TG, on vérifie produit ET client
+            if pricing_rule_model._match_product(rule, product) and pricing_rule_model._match_customer(rule, partner):
+                price = rule._calculate_price(product, quantity, order_date)
                 return {
                     'price': price,
-                    'rule': specific_rule,
-                    'price_type': specific_rule.price_type,
+                    'rule': rule,
+                    'price_type': rule.price_type,
                     'promotion': None,
                 }
         
-        # 3. Rechercher tarif général TG
-        tg_rule = pricing_rule_model.search([
-            ('code', '=', 'TG'),
-            ('active', '=', True),
-            '|', ('date_start', '<=', order_date.date() if hasattr(order_date, 'date') else order_date),
-            ('date_start', '=', False),
-            '|', ('date_end', '>=', order_date.date() if hasattr(order_date, 'date') else order_date),
-            ('date_end', '=', False),
-        ], limit=1, order='priority desc, date_start desc')
-        
-        if tg_rule:
-            if pricing_rule_model._match_product(tg_rule, product):
-                price = tg_rule._calculate_price(product, quantity, order_date)
-                return {
-                    'price': price,
-                    'rule': tg_rule,
-                    'price_type': tg_rule.price_type,
-                    'promotion': None,
-                }
-        
-        # 4. Repli sur prix de vente standard
+        # 5. Repli sur prix de vente standard
         return {
             'price': product.list_price,
             'rule': self.env['pricing.rule'],
