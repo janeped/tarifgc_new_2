@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ==================== PRODUITS DÉMO POUR TESTS TARIFICATION ==================== -->
+    <!-- 
+        Ces produits sont créés spécifiquement pour tester le moteur de tarification gc_pricing.
+        Ils couvrent les cas d'usage du fichier JEU_D_ESSAI_TARIFICATION_ODOO.xlsx
+    -->
+
+    <!-- Produit 1: CIRE PARAFFINE PRETE A L'EMPLOI SACHET 1 KG (réf: 133000) -->
+    <!-- Tarif général évolutif + promo OLIM/BR -->
+    <record id="demo_product_cire_paraffine_1kg" model="product.product">
+        <field name="name">CIRE PARAFFINE PRETE A L'EMPLOI SACHET 1 KG</field>
+        <field name="default_code">133000</field>
+        <field name="type">product</field>
+        <field name="list_price">7.76</field>
+        <field name="standard_price">5.00</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Cire paraffine prête à l'emploi en sachet de 1kg</field>
+    </record>
+
+    <!-- Produit 2: LIVRE DE PYROGRAVURE (réf: 897261) -->
+    <!-- Tarif NET non remisable (marges faibles) -->
+    <record id="demo_product_livre_pyrogravure" model="product.product">
+        <field name="name">LIVRE DE PYROGRAVURE</field>
+        <field name="default_code">897261</field>
+        <field name="type">product</field>
+        <field name="list_price">17.51</field>
+        <field name="standard_price">15.00</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Livre de pyrogravure - Tarif NET non remisable</field>
+    </record>
+
+    <!-- Produit 3: FIMO GENERIQUE 454g (réf: RFIMO454) -->
+    <!-- Article générique qui pilote 80+ déclinaisons coloris -->
+    <record id="demo_product_fimo_generique_454g" model="product.product">
+        <field name="name">FIMO GENERIQUE 454g</field>
+        <field name="default_code">RFIMO454</field>
+        <field name="type">product</field>
+        <field name="list_price">9.07</field>
+        <field name="standard_price">6.50</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Fimo générique 454g - Référence de pilotage pour déclinaisons</field>
+    </record>
+
+    <!-- Produit 4: FIMO PRO 454 G LAVANDE (réf: 263419) -->
+    <!-- Piloté par RFIMO454 -->
+    <record id="demo_product_fimo_pro_lavande" model="product.product">
+        <field name="name">FIMO PRO 454 G LAVANDE / 8041-62</field>
+        <field name="default_code">263419</field>
+        <field name="type">product</field>
+        <field name="list_price">9.07</field>
+        <field name="standard_price">6.50</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Fimo Pro 454g Lavande - Piloté par référence RFIMO454</field>
+    </record>
+
+    <!-- Produit 5: FIMO PRO 454 G GRIS DAUPHIN (réf: 263422) -->
+    <!-- Piloté par RFIMO454 -->
+    <record id="demo_product_fimo_pro_gris" model="product.product">
+        <field name="name">FIMO PRO 454 G GRIS DAUPHIN / 8041-80</field>
+        <field name="default_code">263422</field>
+        <field name="type">product</field>
+        <field name="list_price">9.07</field>
+        <field name="standard_price">6.50</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Fimo Pro 454g Gris Dauphin - Piloté par référence RFIMO454</field>
+    </record>
+
+    <!-- Produit 6: COLIS POMPONS PLUMES (réf: 750551) -->
+    <!-- Article COMPOSÉ de 8 composants -->
+    <record id="demo_product_colis_pompons_plumes" model="product.product">
+        <field name="name">COLIS POMPONS PLUMES</field>
+        <field name="default_code">750551</field>
+        <field name="type">product</field>
+        <field name="list_price">57.00</field>
+        <field name="standard_price">40.00</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Colis pompons plumes - Article composé de 8 composants</field>
+    </record>
+
+    <!-- Produit 7: STORAGE BOX [E-COM08] (réf: E-COM08) -->
+    <!-- Test simple -->
+    <record id="demo_product_storage_box_ecom08" model="product.product">
+        <field name="name">STORAGE BOX [E-COM08]</field>
+        <field name="default_code">E-COM08</field>
+        <field name="type">product</field>
+        <field name="list_price">10.00</field>
+        <field name="standard_price">7.00</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="categ_id" ref="product.product_category_all"/>
+        <field name="description_sale">Storage Box E-COM08</field>
+    </record>
+</odoo>
