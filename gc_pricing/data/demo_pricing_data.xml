@@ -31,7 +31,7 @@
     <record id="tg_133000_feb26_sep26" model="pricing.rule">
         <field name="code">TG</field>
         <field name="name">TG Cire Paraffine 1kg - 7.76€ HT Brut</field>
-        <field name="product_ids" eval="[(4, ref('product.product_product_133000'))]"/>
+        <field name="product_ids" eval="[(4, ref('demo_product_cire_paraffine_1kg'))]"/>
         <field name="price_type">brut</field>
         <field name="fixed_price">7.76</field>
         <field name="priority">10</field>
@@ -44,7 +44,7 @@
     <record id="tg_133000_oct26_jan28" model="pricing.rule">
         <field name="code">TG</field>
         <field name="name">TG Cire Paraffine 1kg - 7.99€ HT Brut</field>
-        <field name="product_ids" eval="[(4, ref('product.product_product_133000'))]"/>
+        <field name="product_ids" eval="[(4, ref('demo_product_cire_paraffine_1kg'))]"/>
         <field name="price_type">brut</field>
         <field name="fixed_price">7.99</field>
         <field name="priority">10</field>
@@ -57,7 +57,7 @@
     <record id="tg_897261_net" model="pricing.rule">
         <field name="code">TG</field>
         <field name="name">TG Livre Pyrogravure - 17.51€ HT Net</field>
-        <field name="product_ids" eval="[(4, ref('product.product_product_897261'))]"/>
+        <field name="product_ids" eval="[(4, ref('demo_product_livre_pyrogravure'))]"/>
         <field name="price_type">net</field>
         <field name="fixed_price">17.51</field>
         <field name="priority">10</field>
@@ -70,7 +70,7 @@
     <record id="tg_rfimo454_brut" model="pricing.rule">
         <field name="code">TG</field>
         <field name="name">TG Fimo Générique 454g - 9.07€ HT Brut</field>
-        <field name="product_ids" eval="[(4, ref('product.product_product_rfimo454'))]"/>
+        <field name="product_ids" eval="[(4, ref('demo_product_fimo_generique_454g'))]"/>
         <field name="price_type">brut</field>
         <field name="fixed_price">9.07</field>
         <field name="priority">10</field>
@@ -83,7 +83,7 @@
     <record id="tg_750551_kit" model="pricing.rule">
         <field name="code">TG</field>
         <field name="name">TG Colis Pompons Plumes - 57.00€ HT Brut</field>
-        <field name="product_ids" eval="[(4, ref('product.product_product_750551'))]"/>
+        <field name="product_ids" eval="[(4, ref('demo_product_colis_pompons_plumes'))]"/>
         <field name="price_type">brut</field>
         <field name="fixed_price">57.00</field>
         <field name="priority">10</field>
@@ -96,7 +96,7 @@
     <record id="tg_ecom08_storage_box" model="pricing.rule">
         <field name="code">TG</field>
         <field name="name">TG Storage Box E-COM08 - 10.00€ HT Brut</field>
-        <field name="product_ids" eval="[(4, ref('product.product_product_8'))]"/>
+        <field name="product_ids" eval="[(4, ref('demo_product_storage_box_ecom08'))]"/>
         <field name="price_type">brut</field>
         <field name="fixed_price">10.00</field>
         <field name="priority">10</field>
