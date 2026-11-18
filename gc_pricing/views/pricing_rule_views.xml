@@ -24,13 +24,16 @@
             <form string="Règle Tarifaire">
                 <sheet>
                     <div class="oe_title">
+                        <label for="code"/>
                         <h1><field name="code" placeholder="ex: TG, TS, OLIM, BR..."/></h1>
+                        <label for="name"/>
                         <field name="name" placeholder="Nom du tarif"/>
                     </div>
                     <group>
                         <group string="Configuration">
                             <field name="price_type"/>
-                            <field name="fixed_price"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="is_ht"/>
                             <field name="priority"/>
                             <field name="active" widget="boolean_toggle"/>
                         </group>
@@ -38,6 +41,55 @@
                             <field name="date_start"/>
                             <field name="date_end"/>
                         </group>
+                    </group>
+
+                    <separator string="Détermination du Prix"/>
+                    <group>
+                        <group>
+                            <field name="use_reference_price"/>
+                            <field name="reference_product_id" invisible="not use_reference_price" required="use_reference_pricing or use_reference_price"/>
+                            <field name="fixed_price" invisible="use_reference_price"/>
+                            <field name="is_degressive" invisible="use_reference_price"/>
+                        </group>
+                    </group>
+                    <group string="Paliers Dégressifs" invisible="not is_degressive or use_reference_price">
+                        <field name="degressive_qty_intervals">
+                            <list editable="bottom">
+                                <field name="min_quantity"/>
+                                <field name="price_type"/>
+                                <field name="fixed_price" invisible="price_type != 'fixed'"/>
+                                <field name="discount_percent" invisible="price_type != 'discount'"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <separator string="Critères Clients"/>
+                    <group>
+                        <group>
+                            <field name="customer_ids" widget="many2many_tags"/>
+                            <field name="customer_group_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="customer_tariff_family"/>
+                            <field name="customer_tariff_exceptional"/>
+                            <field name="customer_code_tariff"/>
+                        </group>
+                    </group>
+
+                    <separator string="Critères Produits"/>
+                    <group>
+                        <group>
+                            <field name="product_ids" widget="many2many_tags"/>
+                            <field name="product_template_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="product_category_ids" widget="many2many_tags"/>
+                            <field name="product_group_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+
+                    <group string="Commentaire">
+                        <field name="note" nolabel="1" colspan="2" placeholder="Commentaire interne..."/>
                     </group>
                 </sheet>
                 <chatter/>

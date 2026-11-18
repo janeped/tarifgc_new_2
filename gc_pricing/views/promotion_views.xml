@@ -7,7 +7,10 @@
             <list string="Promotions">
                 <field name="code"/>
                 <field name="name"/>
+                <field name="promotion_type"/>
                 <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="priority"/>
                 <field name="active" column_invisible="1"/>
             </list>
         </field>
@@ -20,16 +23,69 @@
             <form string="Promotion Commerciale">
                 <sheet>
                     <div class="oe_title">
+                        <label for="code"/>
                         <h1><field name="code" placeholder="ex: OLIM, BR, RPCREARE..."/></h1>
+                        <label for="name"/>
                         <field name="name" placeholder="Nom de la promotion"/>
                     </div>
                     <group>
-                        <group string="Période">
+                        <group string="Période (obligatoire)">
                             <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                        <group string="Priorité">
+                            <field name="priority"/>
+                            <field name="active" widget="boolean_toggle"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+
+                    <separator string="Type de Promotion"/>
+                    <group>
+                        <group>
+                            <field name="promotion_type"/>
+                            <field name="exclude_from_standard_discounts"/>
+                            <field name="replaces_base_price"/>
                         </group>
                         <group>
-                            <field name="active" widget="boolean_toggle"/>
+                            <field name="is_available_to_all"/>
+                            <field name="is_available_to_all_products"/>
                         </group>
+                    </group>
+
+                    <separator string="Tarif Promotionnel" invisible="promotion_type not in ('price', 'both')"/>
+                    <group invisible="promotion_type not in ('price', 'both')">
+                        <group>
+                            <field name="promo_price_type"/>
+                            <field name="promo_fixed_price" invisible="promo_price_type != 'fixed'"/>
+                            <field name="promo_discount_percent" invisible="promo_price_type != 'discount_percent'"/>
+                            <field name="promo_discount_amount" invisible="promo_price_type != 'discount_fixed'"/>
+                            <field name="promo_currency_id" invisible="promo_price_type != 'discount_fixed'" groups="base.group_multi_currency"/>
+                            <field name="promo_is_net_price"/>
+                        </group>
+                    </group>
+
+                    <separator string="Éligibilité Clients" invisible="is_available_to_all"/>
+                    <group invisible="is_available_to_all">
+                        <group>
+                            <field name="customer_ids" widget="many2many_tags"/>
+                            <field name="customer_group_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+
+                    <separator string="Produits Concernés" invisible="is_available_to_all_products"/>
+                    <group invisible="is_available_to_all_products">
+                        <group>
+                            <field name="product_ids" widget="many2many_tags"/>
+                            <field name="product_template_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="product_category_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+
+                    <group string="Commentaire">
+                        <field name="note" nolabel="1" colspan="2" placeholder="Commentaire interne..."/>
                     </group>
                 </sheet>
                 <chatter/>
