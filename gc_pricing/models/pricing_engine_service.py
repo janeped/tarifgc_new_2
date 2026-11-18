@@ -116,6 +116,7 @@ class PricingEngineService(models.AbstractModel):
         if active_promotions:
             best_promo = active_promotions[0]
             promo_price = best_promo.apply_promotion_price(product.list_price, product)
+            _logger.info(f"[APIC Pricing] Promotion appliquée: {best_promo.code} -> {promo_price}")
             return {
                 'price': promo_price,
                 'rule': self.env['pricing.rule'],
@@ -129,24 +130,43 @@ class PricingEngineService(models.AbstractModel):
         else:
             check_date_str = order_date.strftime('%Y-%m-%d') if isinstance(order_date, datetime) else order_date
         
-        # 3. Chercher TOUTES les règles actives et valides, puis filtrer
+        _logger.debug(f"[APIC Pricing] check_date_str={check_date_str}")
+        
+        # 3. Chercher TOUTES les règles actives, puis filtrer par date en Python
+        # NOTE: Les domaines [('date_end', '=', False)] ne marchent pas car les champs Date vides sont NULL, pas False
         pricing_rule_model = self.env['pricing.rule']
-        all_rules = pricing_rule_model.search([
+        all_rules_active = pricing_rule_model.search([
             ('active', '=', True),
-            '|', ('date_start', '<=', check_date_str),
-            ('date_start', '=', False),
-            '|', ('date_end', '>=', check_date_str),
-            ('date_end', '=', False),
         ], order='priority desc, date_start desc')
+        
+        # Filtrer par validité temporelle en Python (plus fiable que les domaines Odoo pour NULL)
+        all_rules = []
+        for rule in all_rules_active:
+            # Check date_start: doit être <= aujourd'hui OU vide/non défini
+            if rule.date_start and rule.date_start > check_date_str:
+                _logger.debug(f"[APIC Pricing] Règle {rule.code} exclue: date_start {rule.date_start} > {check_date_str}")
+                continue
+            
+            # Check date_end: doit être >= aujourd'hui OU vide/non défini
+            if rule.date_end and rule.date_end < check_date_str:
+                _logger.debug(f"[APIC Pricing] Règle {rule.code} exclue: date_end {rule.date_end} < {check_date_str}")
+                continue
+            
+            all_rules.append(rule)
+        
+        _logger.info(f"[APIC Pricing] Trouvé {len(all_rules)} règles actives et valides")
         
         # 4. Filtrer par code tarifaire du client (priorité aux codes spécifiques)
         tariff_code = partner.customer_tariff_code or 'TG'
+        _logger.debug(f"[APIC Pricing] Code tarif client: {tariff_code}")
         
-        # 4a. Chercher d'abord une règle avec le code exact du client
+        # 4a. Chercher d'abord une règle avec le code exact du client (sauf TG)
         for rule in all_rules:
             if rule.code == tariff_code and rule.code != 'TG':
+                _logger.debug(f"[APIC Pricing] Test règle {rule.code} (spécifique)...")
                 if rule._match_product(product) and rule._match_customer(partner):
                     price = rule._calculate_price(product, quantity, order_date)
+                    _logger.info(f"[APIC Pricing] ✓ Règle spécifique trouvée: {rule.code} -> prix={price}")
                     return {
                         'price': price,
                         'rule': rule,
@@ -155,10 +175,14 @@ class PricingEngineService(models.AbstractModel):
                     }
         
         # 4b. Si pas trouvé, chercher TG (s'applique à tous si pas de critères clients)
-        tg_rules = all_rules.filtered(lambda r: r.code == 'TG')
+        tg_rules = [r for r in all_rules if r.code == 'TG']
+        _logger.debug(f"[APIC Pricing] {len(tg_rules)} règles TG candidates")
+        
         for rule in tg_rules:
+            _logger.debug(f"[APIC Pricing] Test règle TG {rule.name}...")
             if rule._match_product(product) and rule._match_customer(partner):
                 price = rule._calculate_price(product, quantity, order_date)
+                _logger.info(f"[APIC Pricing] ✓ Règle TG trouvée: {rule.code} (id={rule.id}) -> fixed_price={rule.fixed_price} -> prix_calc={price}")
                 return {
                     'price': price,
                     'rule': rule,
@@ -167,6 +191,7 @@ class PricingEngineService(models.AbstractModel):
                 }
         
         # 5. Repli sur prix de vente standard
+        _logger.warning(f"[APIC Pricing] Aucune règle trouvée pour {product.name} / {partner.name} -> repli list_price={product.list_price}")
         return {
             'price': product.list_price,
             'rule': self.env['pricing.rule'],
