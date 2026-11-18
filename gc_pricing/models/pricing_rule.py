@@ -172,7 +172,8 @@ class PricingRule(models.Model):
         
         if self.use_reference_price and self.reference_product_id:
             base_price = self.reference_product_id.list_price
-        elif self.fixed_price:
+        elif self.fixed_price is not False and self.fixed_price is not None:
+            # Test explicite: fixed_price peut être 0.0 (gratuité)
             base_price = self.fixed_price
         else:
             base_price = product.list_price
