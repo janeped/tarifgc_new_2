@@ -16,7 +16,7 @@ Puis applique les remises dans l'ordre :
 4. Remises client par défaut
 """
 
-from odoo import models, api, _
+from odoo import models, api, _, fields
 from odoo.tools import float_round
 from datetime import datetime, date
 import logging
